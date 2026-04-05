@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Single scroll area: app fills viewport; inner main scrolls (no double scrollbar). */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+  min-height: 0;
+}
+
+body {
+  overflow: hidden;
+}

@@ -7,12 +7,12 @@ const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-full min-h-0 overflow-hidden bg-gray-50">
       {/* Sidebar */}
       {isSidebarOpen && (
-        <div className="w-64 bg-white border-r border-gray-200">
+        <div className="w-64 shrink-0 flex flex-col bg-white border-r border-gray-200 min-h-0 h-full overflow-hidden">
           {/* Sidebar Header */}
-          <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200">
+          <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200 shrink-0">
             {/* Brand name */}
             <span className="text-lg font-semibold text-blue-600">
               ImageReality
@@ -25,15 +25,17 @@ const Dashboard = () => {
               <Menu size={22} className="text-gray-700" />
             </button>
           </div>
-          {/* Navigation */}
-          <Sidebar />
+          {/* Navigation — scrolls independently when menu is tall */}
+          <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
+            <Sidebar />
+          </div>
         </div>
       )}
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-h-0 min-w-0 overflow-hidden">
         {/* Header */}
-        <header className="bg-white border-b border-gray-200 px-6 py-4">
+        <header className="shrink-0 bg-white border-b border-gray-200 px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               {/* Hamburger Menu Button - Shows only when sidebar is closed */}
@@ -81,8 +83,8 @@ const Dashboard = () => {
           </div>
         </header>
 
-        {/* Main Page Content */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        {/* Main Page Content — sole vertical scroll for the work area */}
+        <main className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-6">
           <Outlet /> {/* Pages render here */}
         </main>
       </div>

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import DashboardLayout from "./components/Dashboard";
 
 // main pages
@@ -39,6 +39,7 @@ import Estimate from "./components/pages/Sales/Estimate";
 import Invoices from "./components/pages/Sales/Invoices";
 import Items from "./components/pages/Sales/Items";
 import Payments from "./components/pages/Sales/Payments";
+import SalesOverview from "./components/pages/Sales/SalesOverview";
 
 // real estate subpages
 import RealEstate from "./components/pages/RealEstate/RealEstate";
@@ -52,12 +53,17 @@ import Approvals from "./components/pages/RealEstate/Approvals";
 import BuyRequests from "./components/pages/RealEstate/BuyRequests";
 import Tenants from "./components/pages/RealEstate/Tenants";
 import Settings from "./components/pages/RealEstate/Settings";
+import RealEstateReports from "./components/pages/RealEstate/RealEstateReports";
+import RealEstateProjects from "./components/pages/RealEstate/Projects";
+import UtilitiesUsers from "./components/pages/Utilities/Users";
+import UtilitiesSettings from "./components/pages/Utilities/UtilitiesSettings";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/*" element={<DashboardLayout />}>
+    <div className="h-full min-h-0">
+      <Router>
+        <Routes>
+          <Route path="/*" element={<DashboardLayout />}>
           {/* Main Dashboard */}
           <Route index element={<DashboardPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
@@ -65,6 +71,8 @@ function App() {
 
           {/* Sales */}
           <Route path="sales" element={<Sales />}>
+            <Route index element={<SalesOverview />} />
+            <Route path="overview" element={<SalesOverview />} />
             <Route path="proposals" element={<Proposals />} />
             <Route path="credit-notes" element={<CreditNotes />} />
             <Route path="estimates" element={<Estimate />} />
@@ -75,6 +83,7 @@ function App() {
 
           {/* Real Estate */}
           <Route path="real-estate" element={<RealEstate />}>
+            <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="property-owners" element={<PropertyOwners />} />
             <Route path="mystaffs" element={<Mystaffs />} />
@@ -84,8 +93,9 @@ function App() {
             <Route path="approvals" element={<Approvals />} />
             <Route path="buy-requests" element={<BuyRequests />} />
             <Route path="tenants" element={<Tenants />} />
-            <Route path="reports" element={<Reports />} />
+            <Route path="reports" element={<RealEstateReports />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="projects" element={<RealEstateProjects />} />
           </Route>
 
           {/* Others */}
@@ -101,6 +111,9 @@ function App() {
 
           {/* Utilities */}
           <Route path="utilities" element={<Utilities />}>
+            <Route index element={<Navigate to="users" replace />} />
+            <Route path="users" element={<UtilitiesUsers />} />
+            <Route path="settings" element={<UtilitiesSettings />} />
             <Route path="media" element={<Media />} />
             <Route path="bulk-pdf-export" element={<BulkPDFExport />} />
             <Route path="calendar" element={<Calendar />} />
@@ -111,6 +124,7 @@ function App() {
 
           {/* Reports */}
           <Route path="reports" element={<Reports />}>
+            <Route index element={<Navigate to="sales" replace />} />
             <Route path="sales" element={<ReportSales />} />
             <Route path="expenses-vs-income" element={<ReportExpensesVsIncome />} />
             <Route path="expenses" element={<ReportExpenses />} />
@@ -121,9 +135,10 @@ function App() {
 
           {/* Setup */}
           <Route path="setup" element={<Setup />} />
-        </Route>
-      </Routes>
-    </Router>
+          </Route>
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
