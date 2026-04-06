@@ -192,12 +192,6 @@ RealEstate_CRM_Portal/
 
 ---
 
-## 📄 License
-
-Add a license if you plan to open-source this project (MIT, Apache-2.0, etc.).
-
----
-
 ## 🤝 Contributing
 
 Contributions are welcome. Feel free to open an issue or submit a pull request with improvements.
