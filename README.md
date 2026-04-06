@@ -7,8 +7,6 @@ This repository contains:
 - **client/**: React + Vite frontend (TailwindCSS + Bootstrap UI)
 - **backend/**: Node.js + Express API with MongoDB (Mongoose) and JWT authentication
 
-> Note: This is an actively developed project. Screenshots and feature list can be updated as the UI evolves.
-
 ---
 
 ## ✨ Key Features
@@ -79,28 +77,10 @@ This repository contains:
 ---
 
 ## 📸 Screenshots
+<img width="1345" height="644" alt="image" src="https://github.com/user-attachments/assets/4c3b3463-c772-4074-ba31-d9b09d50d1c3" />
+<img width="1350" height="643" alt="image" src="https://github.com/user-attachments/assets/56ed1302-4352-40dd-8b5e-1d5fb196301e" />
+<img width="1352" height="638" alt="image" src="https://github.com/user-attachments/assets/0a6f5d8c-5d4e-47af-b405-6cfaf46cd327" />
 
-You can add screenshots in the README by placing images in a folder like `docs/screenshots/` and referencing them here.
-
-Example structure:
-
-```
-/docs
-  /screenshots
-    dashboard.png
-    leads.png
-```
-
-Then reference in Markdown:
-
-```md
-![Dashboard](docs/screenshots/dashboard.png)
-![Leads](docs/screenshots/leads.png)
-```
-
-If you want, upload screenshots and tell me the filenames—you can also paste images here and I’ll format the section for you.
-
----
 
 ## ✅ Prerequisites
 
