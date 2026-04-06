@@ -8,8 +8,8 @@ const signupValidation =  (req,res,next) => {
     });
     const { error } = schema.validate(req.body);
     if (error) {
-        return res.status(400)
-        .json({ message: "Bad Request", error });
+        const msg = error.details.map((d) => d.message.replace(/"/g, "")).join(" ");
+        return res.status(400).json({ message: msg, success: false });
     }
     next();
 }
@@ -20,8 +20,8 @@ const loginValidation =  (req,res,next) => {
     });
     const { error } = schema.validate(req.body);
     if (error) {
-        return res.status(400)
-        .json({ message: "Bad Request", error });
+        const msg = error.details.map((d) => d.message.replace(/"/g, "")).join(" ");
+        return res.status(400).json({ message: msg, success: false });
     }
     next();
 }

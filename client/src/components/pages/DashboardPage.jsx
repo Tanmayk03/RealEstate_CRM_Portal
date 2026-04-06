@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
 const LoginPage = () => {
   const { login } = useAuth();
   const [formData, setFormData] = useState({
-    email: 'rahul.sharma@decrypton.in',
+    email: 'rahul.sharma@company.com',
     password: '',
     rememberMe: false,
     language: 'English'
@@ -67,7 +67,7 @@ const LoginPage = () => {
       const userData = {
         email: formData.email,
         name: 'Rahul Sharma',
-        company: 'Decrypton'
+        company: 'Company'
       };
       login(userData);
     } else {
@@ -336,7 +336,7 @@ const DashboardLayout = () => {
                   </span>
                 </div>
                 <span className="text-sm font-medium text-gray-700">
-                  {user?.company || 'Decrypton'}
+                  {user?.company || 'Company'}
                 </span>
                 <ChevronDown size={16} className="text-gray-400" />
               </div>

@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import DashboardLayout from "./components/Dashboard";
+import { RequireAuth, GuestOnly } from "./components/AuthGate";
+import Login from "./components/pages/Login";
+import Signup from "./components/pages/Signup";
 
 // main pages
 import DashboardPage from "./components/pages/DashboardPage";
@@ -63,9 +66,32 @@ function App() {
     <div className="h-full min-h-0">
       <Router>
         <Routes>
-          <Route path="/*" element={<DashboardLayout />}>
-          {/* Main Dashboard */}
-          <Route index element={<DashboardPage />} />
+          <Route
+            path="/login"
+            element={
+              <GuestOnly>
+                <Login />
+              </GuestOnly>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <GuestOnly>
+                <Signup />
+              </GuestOnly>
+            }
+          />
+          <Route
+            path="/*"
+            element={
+              <RequireAuth>
+                <DashboardLayout />
+              </RequireAuth>
+            }
+          >
+            {/* Main Dashboard */}
+            <Route index element={<DashboardPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="customers" element={<Customers />} />
 
@@ -133,8 +159,8 @@ function App() {
             <Route path="timesheet-overview" element={<ReportTimesheetOverview />} />
           </Route>
 
-          {/* Setup */}
-          <Route path="setup" element={<Setup />} />
+            {/* Setup */}
+            <Route path="setup" element={<Setup />} />
           </Route>
         </Routes>
       </Router>

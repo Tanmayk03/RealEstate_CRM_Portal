@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import { Outlet } from "react-router-dom";
-import { Search, Bell, ChevronDown, Menu } from "lucide-react";
+import { Search, Bell, ChevronDown, Menu, LogOut } from "lucide-react";
+import { useAuth } from "../context/AuthContext";
+
+function initialsFromName(name) {
+  if (!name?.trim()) return "?";
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const close = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false);
+    };
+    document.addEventListener("click", close);
+    return () => document.removeEventListener("click", close);
+  }, []);
 
   return (
     <div className="flex h-full min-h-0 overflow-hidden bg-gray-50">
@@ -70,14 +89,42 @@ const Dashboard = () => {
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
               </div>
               {/* Profile */}
-              <div className="flex items-center space-x-2 cursor-pointer">
-                <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">D</span>
-                </div>
-                <span className="text-sm font-medium text-gray-700">
-                  Decrypton
-                </span>
-                <ChevronDown size={16} className="text-gray-400" />
+              <div className="relative" ref={menuRef}>
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen((o) => !o)}
+                  className="flex items-center space-x-2 cursor-pointer rounded-lg px-2 py-1 hover:bg-gray-50"
+                >
+                  <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shrink-0">
+                    <span className="text-white text-sm font-medium">{initialsFromName(user?.name)}</span>
+                  </div>
+                  <div className="text-left hidden sm:block">
+                    <span className="text-sm font-medium text-gray-900 block leading-tight">{user?.name || "User"}</span>
+                    {user?.role === "admin" && (
+                      <span className="text-[10px] font-semibold uppercase text-blue-600">Admin</span>
+                    )}
+                  </div>
+                  <ChevronDown size={16} className="text-gray-400 shrink-0" />
+                </button>
+                {menuOpen && (
+                  <div className="absolute right-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg py-1 z-50">
+                    <div className="px-3 py-2 border-b border-gray-100 sm:hidden">
+                      <p className="text-sm font-medium text-gray-900">{user?.name}</p>
+                      {user?.role === "admin" && <p className="text-xs text-blue-600 font-medium">Administrator</p>}
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMenuOpen(false);
+                        logout();
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                    >
+                      <LogOut size={16} />
+                      Log out
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

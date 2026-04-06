@@ -4,7 +4,7 @@ import Modal from "../../shared/Modal";
 import { TableSkeleton, EmptyStateRow } from "../../shared/TableStates";
 
 const initialUsers = [
-  { id: "1", name: "Decrypton Admin", email: "admin@example.com", role: "Admin", status: "Active", joined: "2025-01-10" },
+  { id: "1", name: "Company Admin", email: "admin@example.com", role: "Admin", status: "Active", joined: "2025-01-10" },
   { id: "2", name: "Agent Riya", email: "riya@example.com", role: "Agent", status: "Active", joined: "2025-08-02" },
 ];
 
